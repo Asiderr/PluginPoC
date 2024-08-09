@@ -1,0 +1,52 @@
+# The purpose of this Dockerfile is to test the script that installs the necessary packages for the Ubuntu development environment
+# RUN it from the root of the project directory
+# We need to be sure that both env script and cmake are working, so use --no-cache to force the commands to run every time
+# docker build --no-cache -t ubuntu_devenv -f Docker/Dockerfile_ubuntu_devenv .
+
+FROM ubuntu:24.04
+
+USER root
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+# Copy project files
+COPY . /usr/local/src/Board-Health-Monitor
+WORKDIR /usr/local/src/Board-Health-Monitor
+
+# Clean the project directory
+RUN rm -rf build
+RUN rm -rf build_debug
+RUN rm -rf bin
+
+# Use the script to install the necessary packages
+RUN ./scripts/devenv/devenv_install_ubuntu.sh
+
+# BUILD The project in Release mode
+RUN mkdir -p ./build
+WORKDIR /usr/local/src/Board-Health-Monitor/build
+
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN make
+
+# Test If the project builds successfully
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN stat ./bin/data-provider-battery.out
+RUN stat ./bin/data-provider-disk.out
+RUN stat ./bin/deamon.out
+RUN stat ./bin/health-monitor.out
+
+# Build The project in Debug mode
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN mkdir -p ./build_debug
+WORKDIR /usr/local/src/Board-Health-Monitor/build_debug
+
+RUN cmake -DCMAKE_BUILD_TYPE=Debug ..
+RUN make
+
+# Test If the project builds successfully
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN stat ./bin/data-provider-battery.out
+RUN stat ./bin/data-provider-disk.out
+RUN stat ./bin/deamon.out
+RUN stat ./bin/health-monitor.out
