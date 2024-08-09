@@ -32,8 +32,10 @@ endif()
 
 # add compiler option for specific compiler
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  add_compile_options("-Weverything")
-else() # gcc or icc
+  message(STATUS "Configuring for Clang")
+  add_compile_options("-Weverything" "-Wno-c++98-compat-pedantic")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  message(STATUS "Configuring for gcc")
   add_compile_options("-Wall" "-Wextra")
 endif()
 

@@ -14,13 +14,55 @@ ENV TZ=Etc/UTC
 COPY . /usr/local/src/Board-Health-Monitor
 WORKDIR /usr/local/src/Board-Health-Monitor
 
+# Use the script to install the necessary packages
+RUN ./scripts/devenv/devenv_install_ubuntu.sh
+
+############### G++ ###############
+RUN export CXX=g++
+
 # Clean the project directory
 RUN rm -rf build
 RUN rm -rf build_debug
 RUN rm -rf bin
 
-# Use the script to install the necessary packages
-RUN ./scripts/devenv/devenv_install_ubuntu.sh
+# BUILD The project in Release mode
+RUN mkdir -p ./build
+WORKDIR /usr/local/src/Board-Health-Monitor/build
+
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN make
+
+# Test If the project builds successfully
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN stat ./bin/data-provider-battery.out
+RUN stat ./bin/data-provider-disk.out
+RUN stat ./bin/deamon.out
+RUN stat ./bin/health-monitor.out
+
+# Build The project in Debug mode
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN mkdir -p ./build_debug
+WORKDIR /usr/local/src/Board-Health-Monitor/build_debug
+
+RUN cmake -DCMAKE_BUILD_TYPE=Debug ..
+RUN make
+
+# Test If the project builds successfully
+WORKDIR /usr/local/src/Board-Health-Monitor/
+RUN stat ./bin/data-provider-battery.out
+RUN stat ./bin/data-provider-disk.out
+RUN stat ./bin/deamon.out
+RUN stat ./bin/health-monitor.out
+
+#############################################
+############### clang++ ###############
+
+RUN export CXX=clang++
+
+# Clean the project directory
+RUN rm -rf build
+RUN rm -rf build_debug
+RUN rm -rf bin
 
 # BUILD The project in Release mode
 RUN mkdir -p ./build
