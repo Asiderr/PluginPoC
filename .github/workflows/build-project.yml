@@ -23,7 +23,7 @@ jobs:
         name: Build the Docker image
         run: |
           DOCKER_BUILDKIT=1 docker build --no-cache \
-            --file Docker/Dockerfile_ubuntu_devenv --output out .
+            --file docker/Dockerfile-ubuntu-devenv --output out .
       -
         name: Upload Artifacts
         uses: actions/upload-artifact@v4
