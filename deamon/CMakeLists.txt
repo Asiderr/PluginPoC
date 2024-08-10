@@ -1,20 +1,4 @@
-set(DEAMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(DEAMON_BINARY "deamon.out")
-
-file(GLOB DEAMON_HEADER_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/include/*/*.hpp"
-    "${DEAMON_DIR}/include/*.hpp"
-)
-
-file(GLOB DEAMON_SRC_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/src/*/*.cpp"
-    "${DEAMON_DIR}/src/*.cpp"
-)
-
-file(GLOB DEAMON_APP_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/app/*/*.cpp"
-    "${DEAMON_DIR}/app/*.cpp"
-)
+include (${Board-Health-Monitor_SOURCE_DIR}/cmake/project-settings.cmake)
 
 # Set the output directory for the binary
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")

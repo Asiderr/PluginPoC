@@ -1,20 +1,4 @@
-set(HEALTH_MONITOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(HEALTH_MONITOR_BINARY "health-monitor.out")
-
-file(GLOB HEALTH_MONITOR_HEADER_LIST CONFIGURE_DEPENDS
-    "${HEALTH_MONITOR_DIR}/include/*/*.hpp"
-    "${HEALTH_MONITOR_DIR}/include/*.hpp"
-)
-
-file(GLOB HEALTH_MONITOR_SRC_LIST CONFIGURE_DEPENDS
-    "${HEALTH_MONITOR_DIR}/src/*/*.cpp"
-    "${HEALTH_MONITOR_DIR}/src/*.cpp"
-)
-
-file(GLOB HEALTH_MONITOR_APP_LIST CONFIGURE_DEPENDS
-    "${HEALTH_MONITOR_DIR}/app/*/*.cpp"
-    "${HEALTH_MONITOR_DIR}/app/*.cpp"
-)
+include (${Board-Health-Monitor_SOURCE_DIR}/cmake/project-settings.cmake)
 
 # Set the output directory for the binary
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
