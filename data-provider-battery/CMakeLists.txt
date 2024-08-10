@@ -1,3 +1,5 @@
+include (${Board-Health-Monitor_SOURCE_DIR}/common/settings.cmake)
+
 set(DATA_PROVIDER_BATTERY_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(DATA_PROVIDER_BATTERY_BINARY "data-provider-battery.out")
 
@@ -36,3 +38,13 @@ add_executable(${DATA_PROVIDER_BATTERY_BINARY} ${DATA_PROVIDER_BATTERY_APP_LIST}
 target_link_libraries(${DATA_PROVIDER_BATTERY_BINARY} PRIVATE data_provider_battery_srccode)
 
 target_include_directories(${DATA_PROVIDER_BATTERY_BINARY} PUBLIC "${DATA_PROVIDER_BATTERY_DIR}/include")
+
+
+# TEST TO INCLUDE COMMON CODE WITH SPECIFIC COMPILE OPTION (DEFINE)
+# If we want to shared code without any compilation options, use common_srccode
+# In other cases, like this below, when we need to override DEFINEs, we need to create (recompile) our own srcode from sources
+add_library(common_srccode_data_provider_battery STATIC ${COMMON_SRC_LIST} ${COMMON_HEADER_LIST})
+target_include_directories(common_srccode_data_provider_battery PUBLIC "${COMMON_DIR}/include")
+
+target_link_libraries(${DATA_PROVIDER_BATTERY_BINARY} PRIVATE common_srccode_data_provider_battery)
+target_compile_definitions(common_srccode_data_provider_battery PRIVATE -DCOMMON_TEST_DEFINE_1=100 -DCOMMON_TEST_DEFINE_2=200)
