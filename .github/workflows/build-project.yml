@@ -1,0 +1,32 @@
+---
+name: Test building project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build the Docker image
+        run: |
+          DOCKER_BUILDKIT=1 docker build --no-cache \
+            --file Docker/Dockerfile_ubuntu_devenv --output out .
+      -
+        name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: BoardHealthMonitor-binaries
+          path: out/
