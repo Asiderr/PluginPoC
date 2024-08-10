@@ -40,6 +40,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 
+add_subdirectory(common)
 add_subdirectory(deamon)
 add_subdirectory(data-provider-battery)
 add_subdirectory(data-provider-disk)
