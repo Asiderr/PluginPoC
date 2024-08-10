@@ -5,7 +5,7 @@
 # --no-cache to force the commands to run every time
 # DOCKER_BUILDKIT=1 docker build --no-cache --file docker/Dockerfile-ubuntu-devenv --output out .
 
-FROM ubuntu:24.04 as builder
+FROM ubuntu:24.04 AS builder
 
 USER root
 
