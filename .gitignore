@@ -23,6 +23,16 @@
 *.out
 *.app
 
-build/
+# Ignore build directories
+*build/
+*out/
+*bin/
+*bin-debug/
+*lib/
+*obj/
+*CMakeFiles/
+*CMakeCache.txt
+*cmake_install.cmake
+*Makefile
+
 .vscode/
-bin/
