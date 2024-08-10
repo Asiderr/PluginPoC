@@ -31,7 +31,7 @@ function install_docker()
 
 function install_dev_tools()
 {
-    apt install -y gcc g++ clang clang++ clang-tools llvm lld
+    apt install -y gcc g++ clang clang-tools llvm lld
     apt install -y make cmake
     apt install -y git
     apt install -y python3 python3-pip
