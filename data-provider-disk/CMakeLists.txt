@@ -1,22 +1,4 @@
-include (${Board-Health-Monitor_SOURCE_DIR}/common/settings.cmake)
-
-set(DATA_PROVIDER_DISK_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(DATA_PROVIDER_DISK_BINARY "data-provider-disk.out")
-
-file(GLOB DATA_PROVIDER_DISK_HEADER_LIST CONFIGURE_DEPENDS
-    "${DATA_PROVIDER_DISK_DIR}/include/*/*.hpp"
-    "${DATA_PROVIDER_DISK_DIR}/include/*.hpp"
-)
-
-file(GLOB DATA_PROVIDER_DISK_SRC_LIST CONFIGURE_DEPENDS
-    "${DATA_PROVIDER_DISK_DIR}/src/*/*.cpp"
-    "${DATA_PROVIDER_DISK_DIR}/src/*.cpp"
-)
-
-file(GLOB DATA_PROVIDER_DISK_APP_LIST CONFIGURE_DEPENDS
-    "${DATA_PROVIDER_DISK_DIR}/app/*/*.cpp"
-    "${DATA_PROVIDER_DISK_DIR}/app/*.cpp"
-)
+include (${Board-Health-Monitor_SOURCE_DIR}/cmake/project-settings.cmake)
 
 # Set the output directory for the binary
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")

@@ -1,4 +1,4 @@
-include (${Board-Health-Monitor_SOURCE_DIR}/common/settings.cmake)
+include (${Board-Health-Monitor_SOURCE_DIR}/cmake/project-settings.cmake)
 
 message(STATUS "Project source directory: ${Board-Health-Monitor_SOURCE_DIR}")
 message(STATUS "Common directory: ${COMMON_DIR}")
