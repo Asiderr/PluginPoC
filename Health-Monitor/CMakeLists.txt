@@ -16,7 +16,12 @@ file(GLOB HEALTH_MONITOR_APP_LIST CONFIGURE_DEPENDS
     "${HEALTH_MONITOR_DIR}/app/*.cpp"
 )
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin/")
+# Set the output directory for the binary
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin-debug/")
+else()
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin/")
+endif()
 
 # Debug messages
 message(STATUS "Project source directory: ${Board-Health-Monitor_SOURCE_DIR}")

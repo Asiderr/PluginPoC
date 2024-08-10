@@ -17,7 +17,11 @@ file(GLOB DEAMON_APP_LIST CONFIGURE_DEPENDS
 )
 
 # Set the output directory for the binary
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin/")
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin-debug/")
+else()
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin/")
+endif()
 
 message(STATUS "Project source directory: ${Board-Health-Monitor_SOURCE_DIR}")
 message(STATUS "Deamon directory: ${DEAMON_DIR}")

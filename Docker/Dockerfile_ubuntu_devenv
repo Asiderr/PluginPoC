@@ -1,9 +1,11 @@
-# The purpose of this Dockerfile is to test the script that installs the necessary packages for the Ubuntu development environment
+# The purpose of this Dockerfile is to test the script that installs the
+# necessary packages for the Ubuntu development environment
 # RUN it from the root of the project directory
-# We need to be sure that both env script and cmake are working, so use --no-cache to force the commands to run every time
+# We need to be sure that both env script and cmake are working, so use
+# --no-cache to force the commands to run every time
 # docker build --no-cache -t ubuntu_devenv -f Docker/Dockerfile_ubuntu_devenv .
 
-FROM ubuntu:24.04
+FROM ubuntu:24.04 as builder
 
 USER root
 
@@ -24,6 +26,7 @@ RUN export CXX=g++
 RUN rm -rf build
 RUN rm -rf build_debug
 RUN rm -rf bin
+RUN rm -rf bin-debug
 
 # BUILD The project in Release mode
 RUN mkdir -p ./build
@@ -49,10 +52,10 @@ RUN make
 
 # Test If the project builds successfully
 WORKDIR /usr/local/src/Board-Health-Monitor/
-RUN stat ./bin/data-provider-battery.out
-RUN stat ./bin/data-provider-disk.out
-RUN stat ./bin/deamon.out
-RUN stat ./bin/health-monitor.out
+RUN stat ./bin-debug/data-provider-battery.out
+RUN stat ./bin-debug/data-provider-disk.out
+RUN stat ./bin-debug/deamon.out
+RUN stat ./bin-debug/health-monitor.out
 
 #############################################
 ############### clang++ ###############
@@ -88,7 +91,11 @@ RUN make
 
 # Test If the project builds successfully
 WORKDIR /usr/local/src/Board-Health-Monitor/
-RUN stat ./bin/data-provider-battery.out
-RUN stat ./bin/data-provider-disk.out
-RUN stat ./bin/deamon.out
-RUN stat ./bin/health-monitor.out
+RUN stat ./bin-debug/data-provider-battery.out
+RUN stat ./bin-debug/data-provider-disk.out
+RUN stat ./bin-debug/deamon.out
+RUN stat ./bin-debug/health-monitor.out
+
+FROM scratch AS export-artifacts
+COPY --from=builder /usr/local/src/Board-Health-Monitor/bin-debug/ bin-debug/
+COPY --from=builder /usr/local/src/Board-Health-Monitor/bin/ bin/

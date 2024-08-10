@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(
   Board-Health-Monitor
   VERSION 0.1
-  DESCRIPTION "Board Health Monitor" 
+  DESCRIPTION "Board Health Monitor"
   LANGUAGES CXX
 )
 
