@@ -54,3 +54,44 @@ You can install all devtools and dependencies by running proper script from `scr
 | OS    | Script                                                               |
 | :-----| :--------------------------------------------------------------------|
 | Ubuntu| [devenv-install-ubuntu.sh](./scripts/devenv/devenv-install-ubuntu.sh)|
+
+### VSCode setup
+
+In this section you can find our suggested setup for VSCode. You can copy and paste the following configurations to your `.vscode/settings.json` file.
+Or you can manually set them by going to `File -> Preferences -> Settings` and searching for the configuration you want to change.
+
+##### Clangd
+
+If you are using docker as a main build environment, you should use this configuration for clangd.
+It will use docker artifacts to provide proper compile commands.
+
+```json
+{
+    "clangd.path": "/usr/bin/clangd",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/out/build",
+        "--background-index",
+        "--completion-style=detailed",
+        "--header-insertion=never",
+        "-log=info",
+        "-pretty"
+    ]
+}
+```
+
+However, if you are using local build environment, you should use this configuration for clangd.
+It will use local artifacts to provide proper compile commands.
+
+```json
+{
+    "clangd.path": "/usr/bin/clangd",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--background-index",
+        "--completion-style=detailed",
+        "--header-insertion=never",
+        "-log=info",
+        "-pretty"
+    ]
+}
+```

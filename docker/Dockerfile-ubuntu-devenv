@@ -99,3 +99,4 @@ RUN stat ./bin-debug/health-monitor.out
 FROM scratch AS export-artifacts
 COPY --from=builder /usr/local/src/board-health-monitor/bin-debug/ bin-debug/
 COPY --from=builder /usr/local/src/board-health-monitor/bin/ bin/
+COPY --from=builder /usr/local/src/board-health-monitor/build/compile_commands.json build/compile_commands.json

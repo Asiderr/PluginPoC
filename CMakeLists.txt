@@ -7,6 +7,9 @@ project(
   LANGUAGES CXX
 )
 
+# This will produce compile_commands.json file for clangd (vscode extension)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # C++ setup: standard, flags, compiler etc.
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
