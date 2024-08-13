@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cout << "Health-Monitor" << std::endl;
+    std::cout << "Health-Monitor\n";
 
     return 0;
 }

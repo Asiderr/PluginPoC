@@ -8,6 +8,6 @@
 
 void hello()
 {
-    std::cout << "COMMON_TEST_DEFINE1: " << COMMON_TEST_DEFINE_1 << std::endl;
-    std::cout << "COMMON_TEST_DEFINE2: " << COMMON_TEST_DEFINE_2 << std::endl;
+    std::cout << "COMMON_TEST_DEFINE1: " << COMMON_TEST_DEFINE_1 << "\n";
+    std::cout << "COMMON_TEST_DEFINE2: " << COMMON_TEST_DEFINE_2 << "\n";
 }

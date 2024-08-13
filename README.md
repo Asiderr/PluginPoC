@@ -15,12 +15,13 @@ If your OS is not supported by the script, you can use Docker to build the proje
 
 ##### DEPENDENCIES:
 
-| Package | Minimum supported version |
-| :-----| :---------------------------|
-| g++     | 13.2.0                    |
-| clang   | 18.1.3                    |
-| cmake   | 3.10                      |
-| make    | 4.3                       |
+| Package    | Minimum supported version |
+| :-----     | :------------------------ |
+| g++        | 13.2.0                    |
+| clang      | 18.1.3                    |
+| cmake      | 3.10                      |
+| make       | 4.3                       |
+| clang-tidy | 18.1.3                    |
 
 ### Building the project locally
 

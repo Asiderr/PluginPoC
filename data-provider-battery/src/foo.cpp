@@ -4,5 +4,5 @@
 
 void foo()
 {
-    std::cout << "foo" << std::endl;
+    std::cout << "foo\n";
 }

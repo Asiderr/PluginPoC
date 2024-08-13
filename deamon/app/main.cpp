@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cout << "Deamon" << std::endl;
+    std::cout << "Deamon\n";
 
     return 0;
 }

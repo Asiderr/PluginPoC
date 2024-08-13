@@ -36,6 +36,7 @@ function install_dev_tools()
     apt install -y git
     apt install -y python3 python3-pip
     apt install -y curl wget gawk sed grep
+    apt install -y clang-tidy
     
     return 0
 }
