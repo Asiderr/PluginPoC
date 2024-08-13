@@ -7,6 +7,8 @@ project(
   LANGUAGES CXX
 )
 
+option(CMAKE_WERROR "Treat warnings as errors" ON)
+
 # This will produce compile_commands.json file for clangd (vscode extension)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -25,6 +27,11 @@ add_compile_options(
   "$<$<CONFIG:RELEASE>:-O2>"
 )
 
+# For Development target (cmake -DCMAKE_BUILD_TYPE=Development ..)
+add_compile_options(
+  "$<$<CONFIG:DEVELOPMENT>:-O2>"
+)
+
 # Set a default build type if none was specified
 set(default_build_type "Release")
 
@@ -40,6 +47,10 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   message(STATUS "Configuring for gcc")
   add_compile_options("-Wall" "-Wextra")
+endif()
+
+if (CMAKE_WERROR)
+  add_compile_options("-Werror")
 endif()
 
 include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)

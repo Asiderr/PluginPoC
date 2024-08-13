@@ -18,6 +18,11 @@ function (cppcheck_enable)
 
         list(APPEND CPPCHECK_OPTIONS_LIST "--checkers-report=./cppcheck-report.txt")
 
+        if (CMAKE_WERROR)
+            message(STATUS "cppcheck: Treating warnings as errors")
+            list(APPEND CPPCHECK_OPTIONS_LIST "--error-exitcode=1")
+        endif()
+
         set(CMAKE_CXX_CPPCHECK "${CPPCHECK_BIN};${CPPCHECK_OPTIONS_LIST}" PARENT_SCOPE)
 
         message(STATUS "Cppcheck is enabled with options: ${CPPCHECK_OPTIONS_LIST}")
