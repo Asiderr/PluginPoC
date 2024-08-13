@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::cout << "Data-Provider-Disk" << std::endl;
+    std::cout << "Data-Provider-Disk\n";
 
     hello();
 

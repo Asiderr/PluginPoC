@@ -4,8 +4,7 @@
 
 int main()
 {
-    std::cout << "Data-Provider-Battery" << std::endl;
-
+    std::cout << "Data-Provider-Battery\n";
     hello();
 
     return 0;

@@ -42,6 +42,8 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   add_compile_options("-Wall" "-Wextra")
 endif()
 
+include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)
+clang_tidy_enable()
 
 add_subdirectory(common)
 add_subdirectory(deamon)
