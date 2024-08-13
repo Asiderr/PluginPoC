@@ -32,10 +32,17 @@ You can build the project locally by running the following command:
 mkdir -p build && cd build && cmake .. && make
 ```
 
-CMake supports 2 build types: `Debug` and `Release`. You can specify the build type by running the following command:
+CMake supports 2 build types: `Debug` and `Release`. The default type is `Release`. You can specify the build type by running the following command:
 
 ```bash
 mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make
+```
+
+**Note** By default our build system treats warnings as errors. You can disable this behavior by setting the flag `CMAKE_WERROR=OFF` in the cmake command.
+Example:
+
+```bash
+mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_WERROR=OFF .. && make
 ```
 
 ### Building the project using Docker
