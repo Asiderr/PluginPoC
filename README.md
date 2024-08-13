@@ -22,6 +22,7 @@ If your OS is not supported by the script, you can use Docker to build the proje
 | cmake      | 3.10                      |
 | make       | 4.3                       |
 | clang-tidy | 18.1.3                    |
+| cppcheck   | 2.13.0                    |
 
 ### Building the project locally
 

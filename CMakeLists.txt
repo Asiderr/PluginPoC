@@ -45,6 +45,9 @@ endif()
 include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)
 clang_tidy_enable()
 
+include(${CMAKE_SOURCE_DIR}/cmake/cppcheck.cmake)
+cppcheck_enable()
+
 add_subdirectory(common)
 add_subdirectory(deamon)
 add_subdirectory(data-provider-battery)
