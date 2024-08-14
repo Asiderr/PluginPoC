@@ -39,7 +39,7 @@ RUN make
 WORKDIR /usr/local/src/board-health-monitor/
 RUN stat ./bin/data-provider-battery.out
 RUN stat ./bin/data-provider-disk.out
-RUN stat ./bin/deamon.out
+RUN stat ./bin/daemon.out
 RUN stat ./bin/health-monitor.out
 
 # Build The project in Debug mode
@@ -54,7 +54,7 @@ RUN make
 WORKDIR /usr/local/src/board-health-monitor/
 RUN stat ./bin-debug/data-provider-battery.out
 RUN stat ./bin-debug/data-provider-disk.out
-RUN stat ./bin-debug/deamon.out
+RUN stat ./bin-debug/daemon.out
 RUN stat ./bin-debug/health-monitor.out
 
 #############################################
@@ -78,7 +78,7 @@ RUN make
 WORKDIR /usr/local/src/board-health-monitor/
 RUN stat ./bin/data-provider-battery.out
 RUN stat ./bin/data-provider-disk.out
-RUN stat ./bin/deamon.out
+RUN stat ./bin/daemon.out
 RUN stat ./bin/health-monitor.out
 
 # Build The project in Debug mode
@@ -93,7 +93,7 @@ RUN make
 WORKDIR /usr/local/src/board-health-monitor/
 RUN stat ./bin-debug/data-provider-battery.out
 RUN stat ./bin-debug/data-provider-disk.out
-RUN stat ./bin-debug/deamon.out
+RUN stat ./bin-debug/daemon.out
 RUN stat ./bin-debug/health-monitor.out
 
 FROM scratch AS export-artifacts

@@ -13,24 +13,24 @@ file(GLOB COMMON_SRC_LIST CONFIGURE_DEPENDS
 )
 
 
-################################### DEAMON ####################################
+################################### DAEMON ####################################
 
-set(DEAMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(DEAMON_BINARY "deamon.out")
+set(DAEMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(DAEMON_BINARY "daemon.out")
 
-file(GLOB DEAMON_HEADER_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/include/*/*.hpp"
-    "${DEAMON_DIR}/include/*.hpp"
+file(GLOB DAEMON_HEADER_LIST CONFIGURE_DEPENDS
+    "${DAEMON_DIR}/include/*/*.hpp"
+    "${DAEMON_DIR}/include/*.hpp"
 )
 
-file(GLOB DEAMON_SRC_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/src/*/*.cpp"
-    "${DEAMON_DIR}/src/*.cpp"
+file(GLOB DAEMON_SRC_LIST CONFIGURE_DEPENDS
+    "${DAEMON_DIR}/src/*/*.cpp"
+    "${DAEMON_DIR}/src/*.cpp"
 )
 
-file(GLOB DEAMON_APP_LIST CONFIGURE_DEPENDS
-    "${DEAMON_DIR}/app/*/*.cpp"
-    "${DEAMON_DIR}/app/*.cpp"
+file(GLOB DAEMON_APP_LIST CONFIGURE_DEPENDS
+    "${DAEMON_DIR}/app/*/*.cpp"
+    "${DAEMON_DIR}/app/*.cpp"
 )
 
 ############################### HEALTH MONITOR ################################
