@@ -60,7 +60,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/cppcheck.cmake)
 cppcheck_enable()
 
 add_subdirectory(common)
-add_subdirectory(deamon)
+add_subdirectory(daemon)
 add_subdirectory(data-provider-battery)
 add_subdirectory(data-provider-disk)
 add_subdirectory(health-monitor)
