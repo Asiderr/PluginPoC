@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(
   Board-Health-Monitor
-  VERSION 0.1
+  VERSION 0.1.0
   DESCRIPTION "Board Health Monitor"
   LANGUAGES CXX
 )
@@ -64,3 +64,15 @@ add_subdirectory(daemon)
 add_subdirectory(data-provider-battery)
 add_subdirectory(data-provider-disk)
 add_subdirectory(health-monitor)
+
+install(TARGETS daemon.out health-monitor data-provider-battery.out data-provider-disk.out
+  RUNTIME DESTINATION usr/bin
+  LIBRARY DESTINATION usr/lib/${CMAKE_PROJECT_NAME}
+  ARCHIVE DESTINATION usr/lib/${CMAKE_PROJECT_NAME})
+
+set(CPACK_PACKAGE_DESCRIPTION "Just another CPacke example")
+set(CPACK_PACKAGE_VERSION "${CMAKE_PROJECT_VERSION}")
+set(CPACK_PACKAGE_VENDOR "Infogain")
+set(CPACK_PACKAGE_CONTACT "norbert.kaminski@infogain.com")
+set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION}")
+include (CPack)

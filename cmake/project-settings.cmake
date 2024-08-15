@@ -36,7 +36,7 @@ file(GLOB DAEMON_APP_LIST CONFIGURE_DEPENDS
 ############################### HEALTH MONITOR ################################
 
 set(HEALTH_MONITOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(HEALTH_MONITOR_BINARY "health-monitor.out")
+set(HEALTH_MONITOR_LIBRARY "health-monitor")
 
 file(GLOB HEALTH_MONITOR_HEADER_LIST CONFIGURE_DEPENDS
     "${HEALTH_MONITOR_DIR}/include/*/*.hpp"
