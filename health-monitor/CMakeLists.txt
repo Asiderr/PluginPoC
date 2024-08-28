@@ -3,8 +3,10 @@ include (${Board-Health-Monitor_SOURCE_DIR}/cmake/project-settings.cmake)
 # Set the output directory for the binary
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin-debug/")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/lib-debug/")
 else()
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/bin/")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${Board-Health-Monitor_SOURCE_DIR}/lib/")
 endif()
 
 # Debug messages

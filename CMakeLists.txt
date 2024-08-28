@@ -66,9 +66,9 @@ add_subdirectory(data-provider-disk)
 add_subdirectory(health-monitor)
 
 install(TARGETS daemon.out health-monitor data-provider-battery.out data-provider-disk.out
-  RUNTIME DESTINATION usr/bin
-  LIBRARY DESTINATION usr/lib/${CMAKE_PROJECT_NAME}
-  ARCHIVE DESTINATION usr/lib/${CMAKE_PROJECT_NAME})
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib/${CMAKE_PROJECT_NAME}
+  ARCHIVE DESTINATION lib/${CMAKE_PROJECT_NAME})
 
 set(CPACK_PACKAGE_DESCRIPTION "Just another CPacke example")
 set(CPACK_PACKAGE_VERSION "${CMAKE_PROJECT_VERSION}")

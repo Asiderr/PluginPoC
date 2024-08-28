@@ -23,12 +23,16 @@
 *.out
 *.app
 
+# Log files
+*.log
+
 # Ignore build directories
 *build/
 *out/
 *bin/
 *bin-debug/
 *lib/
+*lib-debug/
 *obj/
 *CMakeFiles/
 *CMakeCache.txt
@@ -36,3 +40,4 @@
 *Makefile
 
 .vscode/
+.cache
