@@ -1,0 +1,109 @@
+---
+name: Test building project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build the Docker image
+        run: |
+          DOCKER_BUILDKIT=1 docker build --no-cache \
+            --file docker/Dockerfile-ubuntu-devenv --output out .
+      -
+        name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: BoardHealthMonitor-binaries
+          path: out/
+
+  test-packages:
+    needs: build-docker-image
+    strategy:
+      matrix:
+        os: [opensuse/tumbleweed, 'debian:trixie']
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: BoardHealthMonitor-binaries
+          path: out/
+      -
+        name: Check Artifacts
+        run: ls out
+      -
+        name: Start LocalStack
+        uses: LocalStack/setup-localstack@v0.2.2
+        with:
+          image-tag: 'latest'
+      -
+        name: Test docker network
+        run: docker network ls
+      -
+        name: Test package on the target OS
+        if: matrix.os == 'debian:trixie'
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ matrix.os }}
+          shell: bash
+          options: --network=host -v ${{ github.workspace }}/out:/out
+          run: |
+            apt update
+            apt install -y libcurl4-openssl-dev libssl-dev uuid-dev zlib1g-dev
+            apt install -y libpulse-dev python3 python3-venv
+            python3 -m venv venv
+            source venv/bin/activate
+            pip3 install awscli awscli-local
+            awslocal s3api create-bucket --bucket test-bucket
+            awslocal s3api list-buckets
+            apt install /out/Board-Health-Monitor-0.1.0.deb
+            stat /usr/bin/daemon.out
+            stat /usr/bin/data-provider-battery.out
+            stat /usr/bin/data-provider-disk.out
+            stat /usr/lib/Board-Health-Monitor/libhealth-monitor.so
+            mkdir ~/.aws
+            echo "[default]" >> ~/.aws/credentials
+            echo "aws_access_key_id=test" >> ~/.aws/credentials
+            echo "aws_secret_access_key=test" >> ~/.aws/credentials
+            daemon.out
+      -
+        name: Test package on the target OS (OpenSUSE)
+        if: matrix.os == 'opensuse/tumbleweed'
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ matrix.os }}
+          shell: bash
+          options: --network=host -v ${{ github.workspace }}/out:/out
+          run: |
+            zypper update
+            zypper install -y python311 python311-virtualenv
+            python3.11 -m venv venv
+            source venv/bin/activate
+            pip3 install awscli awscli-local
+            awslocal s3api list-buckets
+            awslocal s3api create-bucket --bucket test-bucket
+            rpm -i --force --nodeps /out/Board-Health-Monitor-0.1.0.rpm
+            mkdir ~/.aws
+            echo "[default]" >> ~/.aws/credentials
+            echo "aws_access_key_id=test" >> ~/.aws/credentials
+            echo "aws_secret_access_key=test" >> ~/.aws/credentials
+            stat /usr/bin/daemon.out
+            stat /usr/bin/data-provider-battery.out
+            stat /usr/bin/data-provider-disk.out
+            stat /usr/lib/Board-Health-Monitor/libhealth-monitor.so
