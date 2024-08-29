@@ -11,7 +11,7 @@ function install_aws_sdk()
     # Build aws-sdk for C++ with S3 service
     mkdir sdk_build && cd sdk_build
     cmake ../aws-sdk-cpp -DCMAKE_BUILD_TYPE=Debug -DFORCE_SHARED_CRT=OFF -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=/usr/ -DCMAKE_INSTALL_PREFIX=/usr/ -DBUILD_ONLY="s3"
-    make
+    make -j $(nproc)
 
     # Install aws-sdk for C++
     make install
